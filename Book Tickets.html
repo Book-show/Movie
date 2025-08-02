@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tixhub</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f5f5;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    label, select, input {
+      display: block;
+      margin: 10px 0;
+      width: 100%;
+    }
+    .seats {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 5px;
+      margin: 20px 0;
+      justify-content: center;
+    }
+    .seat {
+      width: 30px;
+      height: 30px;
+      background: #ddd;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+      line-height: 30px;
+    }
+    .seat.selected {
+      background: green;
+      color: white;
+    }
+    .seat.booked {
+      background: red;
+      pointer-events: none;
+    }
+    .legend {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 10px;
+    }
+    .legend span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .price, .payment, .confirm {
+      margin-top: 20px;
+    }
+    .btn {
+      background: #222;
+      color: white;
+      padding: 10px;
+      border: none;
+      width: 100%;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .message {
+      text-align: center;
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+    }
+    #confirmation {
+      display: none;
+      background: #e6ffee;
+      border: 1px solid #88cc88;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+    #confirmation h2 {
+      color: #2e7d32;
+    }
+    #confirmation p {
+      margin: 10px 0;
+    }
+    body{
+      background-color: red;
+      background-size: cover;
+    }
+button{
+color: white;
+font-size: 20px;
+background: green;
+width: 100px;
+height: 50px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Book Your Movie</h1>
+
+    <div id="booking-form">
+      <label>Location:</label>
+      <select id="location">
+        <option value="Chennai">Chennai</option>
+  <option value="Coimbatore">Coimbatore</option>
+  <option value="Cuddalore">Cuddalore</option>
+  <option value="Dharmapuri">Dharmapuri</option>
+  <option value="Dindigul">Dindigul</option>
+  <option value="Erode">Erode</option>
+  <option value="Kallakurichi">Kallakurichi</option>
+  <option value="Kanchipuram">Kanchipuram</option>
+  <option value="Kanyakumari">Kanyakumari</option>
+  <option value="Karur">Karur</option>
+  <option value="Krishnagiri">Krishnagiri</option>
+  <option value="Madurai">Madurai</option>
+  <option value="Mayiladuthurai">Mayiladuthurai</option>
+  <option value="Nagapattinam">Nagapattinam</option>
+  <option value="Namakkal">Namakkal</option>
+  <option value="Nilgiris">Nilgiris</option>
+  <option value="Perambalur">Perambalur</option>
+  <option value="Theni">Theni</option>
+  <option value="Thoothukudi">Thoothukudi</option>
+  <option value="Tiruchirappalli">Tiruchirappalli</option>
+  <option value="Tirunelveli">Tirunelveli</option>
+  <option value="Tirupathur">Tirupathur</option>
+  <option value="Tiruppur">Tiruppur</option>
+  <option value="Tiruvallur">Tiruvallur</option>
+  <option value="Tiruvannamalai">Tiruvannamalai</option>
+  <option value="Tiruvarur">Tiruvarur</option>
+  <option value="Vellore">Vellore</option>
+  <option value="Viluppuram">Viluppuram</option>
+  <option value="Virudhunagar">Virudhunagar</option>
+</select>
+
+      <label>Theatre:</label>
+      <select id="theatre">
+        <option value="Sathyam Cinemas, Chennai">Sathyam Cinemas, Chennai</option>
+  <option value="AGS Cinemas, T. Nagar">AGS Cinemas, T. Nagar</option>
+  <option value="Vetri Cinemas, Madurai">Vetri Cinemas, Madurai</option>
+  <option value="INOX, Vishaal De Mal, Madurai">INOX, Vishaal De Mal, Madurai</option>
+  <option value="Guru Cinemas, Madurai">Guru Cinemas, Madurai</option>
+  <option value="PVR, Brookefields Mall, Coimbatore">PVR, Brookefields Mall, Coimbatore</option>
+  <option value="Cinepolis, Fun Republic, Coimbatore">Cinépolis, Fun Republic, Coimbatore</option>
+  <option value="Broadway Cinemas, Coimbatore">Broadway Cinemas, Coimbatore</option>
+  <option value="KG Cinemas, Coimbatore">KG Cinemas, Coimbatore</option>
+  <option value="Murugan Cinemas, Thudiyalur">Murugan Cinemas, Thudiyalur</option>
+</select>
+
+
+      <label>Movie:</label>
+      <select id="movie">
+        <option value="DNA">DNA</option>
+<option value="Maargan">Maargan</option>
+      <option value="Ace">Ace</option>
+<option value="Akkenam">Akkenam</option>
+<option value="Thalaivan Thalaivi">Thalaivan Thalaivi</option>
+<option value="Desingu Raja 2">Desingu Raja 2</option>
+<option value="Eleven">Eleven</option>
+<option value="Retro">Retro</option>
+<option value="Chennai city Gangsters">Chennai city Gangsters</option>
+<option value="Kuberra">Kuberra</option>
+<option value="Maareesan">Maareesan</option>
+</select>
+<div class="date-time-container">
+  <div>
+    <label for="date">Date:</label>
+    <input type="date" id="date" required />
+    </div>
+
+  <div>
+    <label for="showtime">Show Time:</label>
+    <select id="showtime">
+      <option value="10:00 AM">10:00 AM</option>
+      <option value="1:00 PM">1:00 PM</option>
+      <option value="4:00 PM">4:00 PM</option>
+      <option value="7:00 PM">7:00 PM</option>
+    </select>
+  </div>
+</div>
+
+
+      <h2>Select Your Seats</h2>
+      <div class="seats" id="seats"></div>
+      <div class="legend">
+        <span><div class="seat"></div> Available</span>
+        <span><div class="seat selected"></div> Selected</span>
+        <span><div class="seat booked"></div> Booked</span>
+      </div>
+
+      <div class="price">
+        <p>Total Price:<span id="price">0</span></p>
+      </div>
+  
+
+      <div class="payment">
+        <label>Payment Method:</label>
+        <select>
+          <option>UPI</option>
+          <option>Credit Card</option>
+          <option>Debit Card</option>
+          <option>Net Banking</option>
+        </select>
+      </div>
+       <div class="confirm">
+        <button class="btn" onclick="bookNow()">Pay & Book</button>
+      </div>
+
+
+
+    </div>
+
+    <!-- Booking confirmation shown here -->
+    <div id="confirmation">
+      <h2>Booking Confirmed!</h2>
+      <p><strong>Movie:</strong> <span id="c-movie"></span></p>
+      <p><strong>Date:</strong> <span id="c-date"></span></p>
+      <p><strong>Show Time:</strong> <span id="c-time"></span></p>
+      <p><strong>Location:</strong> <span id="c-location"></span></p>
+      <p><strong>Theatre:</strong> <span id="c-theatre"></span></p>
+      <p><strong>Seats:</strong> <span id="c-seats"></span></p>
+      <p><strong>Total Price:</strong> <span id="c-price"></span></p>
+      <p>Thank You!</p>
+    </div>
+
+  </div>
+
+
+  <script>
+    const seatContainer = document.getElementById('seats');
+    const priceDisplay = document.getElementById('price');
+    const seatPrice = 150;
+    const totalSeats = 50;
+    const bookedSeats = [5, 8, 22];
+    let selectedSeats = [];
+
+    for (let i = 1; i <= totalSeats; i++) {
+      const seat = document.createElement('div');
+      seat.classList.add('seat');
+      seat.innerText = i;
+      if (bookedSeats.includes(i)) {
+        seat.classList.add('booked');
+      }
+      seat.addEventListener('click', () => {
+        if (seat.classList.contains('booked')) return;
+        seat.classList.toggle('selected');
+        const number = parseInt(seat.innerText);
+        if (selectedSeats.includes(number)) {
+          selectedSeats = selectedSeats.filter(s => s !== number);
+        } else {
+          selectedSeats.push(number);
+        }
+        priceDisplay.innerText = selectedSeats.length * seatPrice;
+      });
+      seatContainer.appendChild(seat);
+    }
+
+    function bookNow() {
+      if (selectedSeats.length === 0) {
+        alert('Please select at least one seat.');
+        return;
+      }
+
+      const movie = document.getElementById('movie').value;
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('showtime').value;
+      const location = document.getElementById('location').value;
+      const theatre = document.getElementById('theatre').value;
+      const totalPrice = selectedSeats.length * seatPrice;
+
+      // Hide form, show confirmation
+      document.getElementById('booking-form').style.display = 'none';
+      document.getElementById('confirmation').style.display = 'block';
+
+      // Fill confirmation
+      document.getElementById('c-movie').innerText = movie;
+      document.getElementById('c-date').innerText = date;
+      document.getElementById('c-time').innerText = time;
+      document.getElementById('c-location').innerText = location;
+      document.getElementById('c-theatre').innerText = theatre;
+      document.getElementById('c-seats').innerText = selectedSeats.join(', ');
+      document.getElementById('c-price').innerText = totalPrice;
+    }
+  </script>
+</body>
+</html>
